@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "example" {
 
 resource "azurerm_virtual_network" "example" {
   name                = "example-network"
-  address_space       = ["10.0.0.0/16"]
+  address_space       = ["10.65.0.0/16"]
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
 }
@@ -19,7 +19,7 @@ resource "azurerm_subnet" "example" {
   name                 = "internal"
   resource_group_name = "raamses-gaia-playground"
   virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = ["10.0.2.0/24"]
+  address_prefixes     = ["10.65.2.0/24"]
 }
 
 resource "azurerm_network_interface" "example" {
