@@ -38,7 +38,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   name                = "example-machine"
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
-  size                = "DS1_v2"
+  size                = "Standard_DS1_v2"
   admin_username      = "adminIdan"
   admin_password      = "Idantheking123!"
   priority            = "Spot"
