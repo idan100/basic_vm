@@ -5,6 +5,7 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "West Europe"
+  tags     = {application="gaia"}
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -35,11 +36,12 @@ resource "azurerm_network_interface" "example" {
 
 resource "azurerm_windows_virtual_machine" "example" {
   name                = "example-machine"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  resource_group_name = "raamses-gaia-playground"
+  location            = "westeurope"
   size                = "DS1_v2"
   admin_username      = "adminIdan"
   admin_password      = "Idantheking123!"
+  priority            = "Spot"
   network_interface_ids = [
     azurerm_network_interface.example.id,
   ]
@@ -55,4 +57,5 @@ resource "azurerm_windows_virtual_machine" "example" {
     sku       = "2016-Datacenter"
     version   = "latest"
   }
+  tags     = {application="gaia"}
 }
