@@ -2,26 +2,6 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
-  tags     = {application="gaia"}
-}
-
-resource "azurerm_virtual_network" "example" {
-  name                = "example-network"
-  address_space       = ["10.65.0.0/16"]
-  resource_group_name = "raamses-gaia-playground"
-  location            = "westeurope"
-}
-
-resource "azurerm_subnet" "example" {
-  name                 = "internal"
-  resource_group_name = "raamses-gaia-playground"
-  virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = ["10.65.2.0/24"]
-}
-
 resource "azurerm_network_interface" "example" {
   name                = "example-nic"
   resource_group_name = "raamses-gaia-playground"
@@ -29,7 +9,7 @@ resource "azurerm_network_interface" "example" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.example.id
+    subnet_id                     = "/subscriptions/479a31b3-522c-46e5-b9c7-548e80d1c69f/resourceGroups/raamses-gaia-playground/providers/Microsoft.Network/virtualNetworks/example-network/internal"
     private_ip_address_allocation = "Dynamic"
   }
 }
