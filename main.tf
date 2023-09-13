@@ -9,7 +9,7 @@ resource "azurerm_network_interface" "example" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = "/subscriptions/479a31b3-522c-46e5-b9c7-548e80d1c69f/resourceGroups/raamses-gaia-playground/providers/Microsoft.Network/virtualNetworks/example-network/internal"
+    subnet_id                     = "/subscriptions/479a31b3-522c-46e5-b9c7-548e80d1c69f/resourceGroups/raamses-gaia-playground/providers/Microsoft.Network/virtualNetworks/example-network/subnets/internal"
     private_ip_address_allocation = "Dynamic"
   }
 }
