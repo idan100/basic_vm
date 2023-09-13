@@ -3,20 +3,20 @@ provider "azurerm" {
 }
 
 resource "azurerm_virtual_network" "linux_example" {
-  name                = "linux_example-network"
+  name                = "linux-example-network"
   address_space       = ["10.66.0.0/16"]
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
 }
 
-resource "azurerm_subnet" "linux_example" {
-  name                 = "linux_internal"
+resource "azurerm_subnet" "linux-example" {
+  name                 = "linux-internal"
   resource_group_name = "raamses-gaia-playground"
   virtual_network_name = azurerm_virtual_network.linux_example.name
   address_prefixes     = ["10.66.2.0/24"]
 }
 
-resource "azurerm_network_interface" "linux_example" {
+resource "azurerm_network_interface" "linux-example" {
   name                = "linux_example-nic"
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
@@ -29,7 +29,7 @@ resource "azurerm_network_interface" "linux_example" {
 }
 
 resource "azurerm_linux_virtual_machine" "linux_example" {
-  name                = "linux_example-machine"
+  name                = "linux-example-machine"
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
   size                = "Standard_DS1_v2"
