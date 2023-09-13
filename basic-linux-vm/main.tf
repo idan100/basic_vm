@@ -3,33 +3,33 @@ provider "azurerm" {
 }
 
 resource "azurerm_virtual_network" "linux_example" {
-  name                = "example-network"
+  name                = "linux_example-network"
   address_space       = ["10.66.0.0/16"]
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
 }
 
 resource "azurerm_subnet" "linux_example" {
-  name                 = "internal"
+  name                 = "linux_internal"
   resource_group_name = "raamses-gaia-playground"
-  virtual_network_name = azurerm_virtual_network.example.name
+  virtual_network_name = azurerm_virtual_network.linux_example.name
   address_prefixes     = ["10.66.2.0/24"]
 }
 
 resource "azurerm_network_interface" "linux_example" {
-  name                = "example-nic"
+  name                = "linux_example-nic"
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
 
   ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.example.id
+    name                          = "linux_internal"
+    subnet_id                     = azurerm_subnet.linux_example.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
 resource "azurerm_linux_virtual_machine" "linux_example" {
-  name                = "example-machine"
+  name                = "linux_example-machine"
   resource_group_name = "raamses-gaia-playground"
   location            = "westeurope"
   size                = "Standard_DS1_v2"
@@ -38,7 +38,7 @@ resource "azurerm_linux_virtual_machine" "linux_example" {
   priority            = "Spot"
   eviction_policy     = "Deallocate"
   network_interface_ids = [
-    azurerm_network_interface.example.id,
+    azurerm_network_interface.linux_example.id,
   ]
 
   os_disk {
